@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Queue Breaker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+
+  <!-- ============ START SCREEN ============ -->
+  <section id="screen-start" class="screen active">
+    <div class="start-inner">
+      <div class="brand">
+        <span class="brand-dot"></span>
+        <h1>QUEUE&nbsp;BREAKER</h1>
+      </div>
+      <p class="tagline">큐에 쌓인 트랙을 전부 지워야 다음 곡으로 넘어갑니다.</p>
+
+      <div class="difficulty-select" role="radiogroup" aria-label="난이도 선택">
+        <button class="diff-pill" data-diff="easy" role="radio" aria-checked="false">
+          <span class="diff-name">EASY</span>
+          <span class="diff-meta">4×8 · 체력 4</span>
+        </button>
+        <button class="diff-pill" data-diff="medium" role="radio" aria-checked="false">
+          <span class="diff-name">MEDIUM</span>
+          <span class="diff-meta">5×9 · 체력 3</span>
+        </button>
+        <button class="diff-pill" data-diff="hard" role="radio" aria-checked="false">
+          <span class="diff-name">HARD</span>
+          <span class="diff-meta">6×10 · 체력 2</span>
+        </button>
+      </div>
+
+      <button id="btn-start" class="btn-play" disabled aria-label="시작">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+          <path d="M5 3.5L18 11L5 18.5V3.5Z" fill="currentColor"/>
+        </svg>
+        <span>PLAY</span>
+      </button>
+
+      <p class="hint">← → 방향키 또는 드래그로 이동 · Space / 클릭으로 발사</p>
+    </div>
+  </section>
+
+  <!-- ============ GAME SCREEN ============ -->
+  <section id="screen-game" class="screen">
+    <header class="hud">
+      <button id="btn-menu" class="pill-btn">‹ MENU</button>
+      <div class="hud-center">
+        <span class="hud-title">QUEUE BREAKER</span>
+        <span id="hud-diff" class="badge">EASY</span>
+      </div>
+      <div class="hud-stats">
+        <span class="stat">SCORE <b id="hud-score">0</b></span>
+      </div>
+    </header>
+
+    <div class="stage-wrap">
+      <div class="stage">
+        <canvas id="canvas" width="800" height="600"></canvas>
+      </div>
+    </div>
+
+    <footer class="now-playing-bar">
+      <div class="lives" id="hud-lives" aria-label="남은 목숨"></div>
+      <div class="seek-hint">DRAG OR ← → · SPACE TO LAUNCH</div>
+    </footer>
+  </section>
+
+  <!-- ============ END MODAL ============ -->
+  <div id="modal-end" class="modal hidden">
+    <div class="modal-card">
+      <span class="modal-icon" id="modal-icon">
+        <svg class="icon-check" width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M5 13l4 4L19 7" stroke="#062012" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+      <h2 id="modal-title">QUEUE CLEARED</h2>
+      <p class="modal-label">SCORE</p>
+      <p id="modal-score" class="modal-score">0</p>
+      <div class="modal-actions">
+        <button id="btn-retry" class="pill-btn pill-btn--accent">RETRY</button>
+        <button id="btn-menu2" class="pill-btn pill-btn--outline">MENU</button>
+      </div>
+    </div>
+  </div>
+
+  <audio id="clear-audio" src="ddudduddu.mp3" preload="auto"></audio>
+  <audio id="fail-audio" src="poop.mp3" preload="auto"></audio>
+</div>
+<script src="game.js"></script>
+</body>
+</html>
